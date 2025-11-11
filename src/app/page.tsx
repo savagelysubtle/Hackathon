@@ -15,7 +15,7 @@ export default function CopilotKitPage() {
       { name: "location", type: "string", required: true },
     ],
     render: ({ args }) => {
-      return <WeatherCard location={args.location} themeColor="#22c55e" />
+      return <WeatherCard location={args.location} themeColor="#65a30d" />
     },
   });
 
@@ -24,7 +24,7 @@ export default function CopilotKitPage() {
     name: "go_to_moon",
     description: "Go to the moon on request.",
     renderAndWaitForResponse: ({ respond, status}) => {
-      return <MoonCard themeColor="#22c55e" status={status} respond={respond} />
+      return <MoonCard themeColor="#65a30d" status={status} respond={respond} />
     },
   });
 

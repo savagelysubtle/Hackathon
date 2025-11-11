@@ -26,8 +26,5 @@
     "ms-vscode.vscode-js-debug",
     "formulahendry.code-runner"
   ],
-  "unwantedRecommendations": [
-    "ms-vscode.vscode-typescript",
-    "hookyqr.beautify"
-  ]
+  "unwantedRecommendations": ["ms-vscode.vscode-typescript", "hookyqr.beautify"]
 }

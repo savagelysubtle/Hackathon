@@ -12,21 +12,21 @@ const PLACEHOLDER_QUESTIONS = [
 
 export function ChatInterface() {
   return (
-    <div className="h-screen flex flex-col bg-black text-white">
+    <div className="h-screen flex flex-col bg-gradient-to-br from-black via-slate-900 to-black text-white">
       {/* Top Bar */}
-      <div className="flex items-center justify-between p-4 border-b border-green-500/20">
+      <div className="flex items-center justify-between p-4 border-b border-lime-500/20 bg-gradient-to-r from-slate-900/50 to-slate-800/50 backdrop-blur-sm">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center font-bold text-black">
+          <div className="w-8 h-8 bg-gradient-to-br from-lime-500 to-lime-600 rounded-lg flex items-center justify-center font-bold text-black shadow-lg">
             R
           </div>
           <div>
-            <div className="text-lg font-semibold">Researcher Agent</div>
-            <div className="text-xs text-gray-400">Your intelligent research companion</div>
+            <div className="text-lg font-semibold text-white">Researcher Agent</div>
+            <div className="text-xs text-lime-400">Your intelligent research companion</div>
           </div>
         </div>
         <Link
           href="/settings"
-          className="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors duration-200 flex items-center gap-2"
+          className="px-4 py-2 bg-gradient-to-r from-slate-800 to-slate-700 hover:from-lime-600 hover:to-lime-700 rounded-lg transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-lime-500/25"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

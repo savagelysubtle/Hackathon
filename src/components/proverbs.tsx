@@ -1,39 +1,45 @@
-import { AgentState } from "@/lib/types";
-
-export interface ProverbsCardProps {
-  state: AgentState;
-  setState: (state: AgentState) => void;
+interface ProverbsCardProps {
+  proverbs: string[];
 }
 
-export function ProverbsCard({ state, setState }: ProverbsCardProps) {
+export function ProverbsCard({ proverbs }: ProverbsCardProps) {
+  if (!proverbs || proverbs.length === 0) {
+    return null;
+  }
+
   return (
-    <div className="bg-white/20 backdrop-blur-md p-8 rounded-2xl shadow-xl max-w-2xl w-full">
-      <h1 className="text-4xl font-bold text-white mb-2 text-center">Proverbs</h1>
-      <p className="text-gray-200 text-center italic mb-6">This is a demonstrative page, but it could be anything you want! 🪁</p>
-      <hr className="border-white/20 my-6" />
-      <div className="flex flex-col gap-3">
-        {state.proverbs?.map((proverb, index) => (
-          <div 
-            key={index} 
-            className="bg-white/15 p-4 rounded-xl text-white relative group hover:bg-white/20 transition-all"
-          >
-            <p className="pr-8">{proverb}</p>
-            <button 
-              onClick={() => setState({
-                ...state,
-                proverbs: state.proverbs?.filter((_, i) => i !== index),
-              })}
-              className="absolute right-3 top-3 opacity-0 group-hover:opacity-100 transition-opacity 
-                bg-red-500 hover:bg-red-600 text-white rounded-full h-6 w-6 flex items-center justify-center"
-            >
-              ✕
-            </button>
+    <div className="bg-gradient-to-r from-slate-900/50 to-slate-800/50 backdrop-blur-sm rounded-xl shadow-xl mt-6 mb-4 max-w-md w-full border border-lime-500/20">
+      <div className="p-6">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-8 h-8 bg-gradient-to-br from-lime-500 to-lime-600 rounded-lg flex items-center justify-center font-bold text-black text-sm">
+            💭
           </div>
-        ))}
+          <div>
+            <h3 className="text-lg font-semibold text-white">Wisdom</h3>
+            <p className="text-sm text-lime-400">Ancient Proverbs</p>
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          {proverbs.map((proverb, index) => (
+            <div
+              key={index}
+              className="bg-gradient-to-r from-slate-800/50 to-slate-700/50 rounded-lg p-4 border border-lime-500/10"
+            >
+              <p className="text-white text-sm italic leading-relaxed">
+                "{proverb}"
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-4 pt-4 border-t border-lime-500/20">
+          <p className="text-xs text-lime-400 text-center">
+            {proverbs.length} proverb{proverbs.length !== 1 ? 's' : ''} of wisdom
+          </p>
+        </div>
       </div>
-      {state.proverbs?.length === 0 && <p className="text-center text-white/80 italic my-8">
-        No proverbs yet. Ask the assistant to add some!
-      </p>}
     </div>
   );
 }
+
