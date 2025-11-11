@@ -43,3 +43,4 @@ export function ProverbsCard({ proverbs }: ProverbsCardProps) {
   );
 }
 
+

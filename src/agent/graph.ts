@@ -1,8 +1,8 @@
-import { StateGraph, START, END } from "@langchain/langgraph";
-import { AgentStateAnnotation } from "./state";
-import { agentNode, toolNode, shouldContinue } from "./nodes";
-import { checkpointer } from "./memory";
-import type { BaseCheckpointSaver } from "@langchain/langgraph/checkpoint/base";
+import { END, START, StateGraph } from '@langchain/langgraph';
+import type { BaseCheckpointSaver } from '@langchain/langgraph-checkpoint';
+import { checkpointer } from './memory';
+import { agentNode, shouldContinue, toolNode } from './nodes';
+import { AgentStateAnnotation } from './state';
 
 /**
  * Agent Graph Definition
@@ -29,18 +29,18 @@ export function createAgentGraph(memoryCheckpointer?: BaseCheckpointSaver) {
   // Create a new StateGraph with our state annotation
   const graph = new StateGraph(AgentStateAnnotation)
     // Add the agent node
-    .addNode("agent", agentNode)
+    .addNode('agent', agentNode)
     // Add the tool execution node
-    .addNode("tools", toolNode)
+    .addNode('tools', toolNode)
     // Set the entry point
-    .addEdge(START, "agent")
+    .addEdge(START, 'agent')
     // Add conditional edge: agent decides whether to use tools
-    .addConditionalEdges("agent", shouldContinue, {
-      continue: "tools", // If tools are needed, go to tools node
+    .addConditionalEdges('agent', shouldContinue, {
+      continue: 'tools', // If tools are needed, go to tools node
       end: END, // Otherwise, end the graph
     })
     // After tools execute, return to agent
-    .addEdge("tools", "agent");
+    .addEdge('tools', 'agent');
 
   // Compile the graph with optional checkpointer for memory
   return graph.compile({ checkpointer: memoryCheckpointer });
@@ -56,4 +56,3 @@ export function createAgentGraph(memoryCheckpointer?: BaseCheckpointSaver) {
  * For production, configure AGENT_MEMORY_TYPE and set up the appropriate database.
  */
 export const agentGraph = createAgentGraph(checkpointer);
-

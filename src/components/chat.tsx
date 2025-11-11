@@ -54,6 +54,23 @@ export function ChatInterface() {
           message: q,
         }))}
         className="flex-1"
+        style={{
+          // CopilotKit theming with lime green colors
+          "--copilot-kit-primary-color": "#65a30d",
+          "--copilot-kit-contrast-color": "#000000",
+          "--copilot-kit-background-color": "#000000",
+          "--copilot-kit-input-background-color": "#1f2937",
+          "--copilot-kit-secondary-color": "#374151",
+          "--copilot-kit-secondary-contrast-color": "#ffffff",
+          "--copilot-kit-separator-color": "#374151",
+          "--copilot-kit-muted-color": "#6b7280",
+          "--copilot-kit-error-background": "#dc2626",
+          "--copilot-kit-error-border": "#dc2626",
+          "--copilot-kit-error-text": "#ffffff",
+          "--copilot-kit-shadow-sm": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+          "--copilot-kit-shadow-md": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+          "--copilot-kit-shadow-lg": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+        } as React.CSSProperties}
       />
     </div>
   );
