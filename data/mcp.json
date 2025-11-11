@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "example-python": {
+      "command": "uvx",
+      "args": ["mcp-run-python"],
+      "enabled": true,
+      "description": "Execute Python code in a sandboxed environment using the official Pydantic MCP Run Python server"
+    }
+  }
+}

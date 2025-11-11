@@ -1,0 +1,33 @@
+{
+  "recommendations": [
+    // Core development tools
+    "ms-vscode.vscode-typescript-next",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss",
+
+    // Next.js development
+    "ms-vscode.vscode-json",
+    "formulahendry.auto-rename-tag",
+    "christian-kohler.path-intellisense",
+
+    // Python backend development
+    "ms-python.python",
+    "ms-python.black-formatter",
+    "charliermarsh.ruff",
+    "ms-python.mypy-type-checker",
+
+    // Additional productivity tools
+    "ms-vscode.vscode-git-graph",
+    "gruntfuggly.todo-tree",
+    "ms-vscode.vscode-power-shell",
+
+    // Testing and debugging
+    "ms-vscode.vscode-js-debug",
+    "formulahendry.code-runner"
+  ],
+  "unwantedRecommendations": [
+    "ms-vscode.vscode-typescript",
+    "hookyqr.beautify"
+  ]
+}
