@@ -68,6 +68,72 @@ yarn dev
 
 This will start the Next.js application with the integrated LangGraph agent.
 
+## Using Local Models with LM Studio
+
+This agent supports both OpenAI GPT models and local models via LM Studio for
+privacy and cost savings.
+
+### Setting up LM Studio
+
+1. **Download and Install LM Studio**: Visit [lmstudio.ai](https://lmstudio.ai)
+   and download the desktop application.
+
+2. **Load a Model**: In LM Studio, download and load a model (e.g., Llama 3.2,
+   Mistral, etc.).
+
+3. **Start the Local Server**: In LM Studio, go to "Local Server" tab and click
+   "Start Server". The server runs on `http://localhost:1234/v1` by default.
+
+4. **Configure Environment**: Update your `.env` file with LM Studio settings:
+
+```env
+# LM Studio Configuration (for local LLM support)
+LM_STUDIO_BASE_URL=http://localhost:1234/v1
+LM_STUDIO_API_KEY=lm-studio  # Can be any value for local server
+LM_STUDIO_MODEL=local-model  # Will be set to the model loaded in LM Studio
+```
+
+### Switching Between Models
+
+You can switch between OpenAI and LM Studio models in your API calls:
+
+#### Using OpenAI (default):
+
+```bash
+curl -X POST http://localhost:3000/api/langgraph \
+  -H "Content-Type: application/json" \
+  -d '{
+    "message": "Hello, how are you?",
+    "model": {"provider": "openai", "modelName": "gpt-4o-mini"}
+  }'
+```
+
+#### Using LM Studio:
+
+```bash
+curl -X POST http://localhost:3000/api/langgraph \
+  -H "Content-Type: application/json" \
+  -d '{
+    "message": "Hello, how are you?",
+    "model": {"provider": "lmstudio"}
+  }'
+```
+
+### Testing the Integration
+
+Run the built-in test script to verify both model providers:
+
+```bash
+# Test both OpenAI and LM Studio
+node scripts/test-models.js
+
+# Test only OpenAI
+node scripts/test-models.js openai
+
+# Test only LM Studio
+node scripts/test-models.js lmstudio
+```
+
 ## Available Scripts
 
 The following scripts can be run using your preferred package manager:

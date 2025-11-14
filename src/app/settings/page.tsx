@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { MCPConfiguration, MCPServerConfig } from "@/lib/types";
-import Link from "next/link";
+import { Header } from "@/components/header";
 
 export default function SettingsPage() {
   const [config, setConfig] = useState<MCPConfiguration>({ mcpServers: {} });
@@ -94,7 +94,7 @@ export default function SettingsPage() {
       if (formData.env.trim()) {
         try {
           env = JSON.parse(formData.env);
-        } catch (e) {
+        } catch {
           setError("Invalid JSON for environment variables");
           return;
         }
@@ -178,25 +178,10 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-slate-900 to-black text-white p-8">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="mb-8 flex justify-between items-center bg-gradient-to-r from-slate-900/50 to-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-lime-500/20">
-          <div>
-            <h1 className="text-3xl font-bold text-white mb-2">
-              MCP Settings
-            </h1>
-            <p className="text-lime-400">
-              Manage Model Context Protocol servers and tools
-            </p>
-          </div>
-          <Link
-            href="/"
-            className="px-4 py-2 bg-gradient-to-r from-slate-800 to-slate-700 text-gray-300 rounded-lg hover:from-lime-600 hover:to-lime-700 hover:text-black transition-all duration-300 shadow-lg"
-          >
-            ← Back to Home
-          </Link>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-black via-slate-900 to-black text-white flex flex-col">
+      <Header activeTab="settings" />
+      <div className="flex-1 p-8">
+        <div className="max-w-6xl mx-auto">
 
         {/* Error Display */}
         {error && (
@@ -426,6 +411,7 @@ export default function SettingsPage() {
             MCP (Model Context Protocol) servers provide additional tools and capabilities to your agent.
             After adding or updating servers, you need to restart the agent for changes to take effect.
           </p>
+        </div>
         </div>
       </div>
     </div>

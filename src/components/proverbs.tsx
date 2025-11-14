@@ -27,7 +27,7 @@ export function ProverbsCard({ proverbs }: ProverbsCardProps) {
               className="bg-gradient-to-r from-slate-800/50 to-slate-700/50 rounded-lg p-4 border border-lime-500/10"
             >
               <p className="text-white text-sm italic leading-relaxed">
-                "{proverb}"
+                &ldquo;{proverb}&rdquo;
               </p>
             </div>
           ))}

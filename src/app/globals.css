@@ -88,12 +88,50 @@ html {
   background: #000000 !important;
   width: 100% !important;
   max-width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
 }
 
 /* Make chat full width */
 [data-copilot-chat] > div {
   width: 100% !important;
   max-width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+/* Make the messages container scrollable - target various possible structures */
+[data-copilot-chat] [role="log"] {
+  flex: 1 1 auto !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  min-height: 0 !important;
+  max-height: 100% !important;
+}
+
+/* Target message containers with common class patterns */
+[data-copilot-chat] [class*="messages"]:not([class*="input"]),
+[data-copilot-chat] [class*="Messages"]:not([class*="Input"]),
+[data-copilot-chat] [class*="message-list"],
+[data-copilot-chat] [class*="MessageList"] {
+  flex: 1 1 auto !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  min-height: 0 !important;
+}
+
+/* Keep input area fixed at bottom */
+[data-copilot-chat] form {
+  flex-shrink: 0 !important;
+}
+
+[data-copilot-chat] [class*="input-container"],
+[data-copilot-chat] [class*="InputContainer"] {
+  flex-shrink: 0 !important;
 }
 
 [data-copilot-chat-input],

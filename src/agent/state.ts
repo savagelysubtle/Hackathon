@@ -1,5 +1,10 @@
-import { Annotation, messagesStateReducer } from "@langchain/langgraph";
-import { BaseMessage } from "@langchain/core/messages";
+import { BaseMessage } from '@langchain/core/messages';
+import { Annotation, messagesStateReducer } from '@langchain/langgraph';
+
+console.log('📊 [STATE] state.ts module loading...');
+console.log(
+  '📊 [STATE] Importing LangGraph Annotation and messagesStateReducer...',
+);
 
 /**
  * Agent State Schema
@@ -28,6 +33,8 @@ export interface AgentState {
    */
 }
 
+console.log('📊 [STATE] AgentState interface defined');
+
 /**
  * State Annotation for LangGraph
  *
@@ -35,10 +42,15 @@ export interface AgentState {
  * - messages: Uses messagesStateReducer to append messages
  * - Other fields: Use reducer functions or direct assignment
  */
+console.log('📊 [STATE] Creating AgentStateAnnotation...');
+
 export const AgentStateAnnotation = Annotation.Root({
   messages: Annotation<BaseMessage[]>({
     reducer: messagesStateReducer, // Use LangGraph's built-in message reducer
-    default: () => [],
+    default: () => {
+      console.log('📊 [STATE] Creating default messages array');
+      return [];
+    },
   }),
   // Add custom state fields with reducers here
   // Example:
@@ -47,3 +59,9 @@ export const AgentStateAnnotation = Annotation.Root({
   // }),
 });
 
+console.log('📊 [STATE] AgentStateAnnotation created successfully');
+console.log(
+  '📊 [STATE] Annotation fields:',
+  Object.keys(AgentStateAnnotation.spec),
+);
+console.log('📊 [STATE] State management ready');

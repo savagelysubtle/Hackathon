@@ -1,5 +1,4 @@
 import { END, START, StateGraph } from '@langchain/langgraph';
-import type { BaseCheckpointSaver } from '@langchain/langgraph-checkpoint';
 import { checkpointer } from './memory';
 import { agentNode, shouldContinue, toolNode } from './nodes';
 import { AgentStateAnnotation } from './state';
@@ -25,25 +24,36 @@ import { AgentStateAnnotation } from './state';
  * @param memoryCheckpointer Optional checkpointer for memory persistence
  * @returns Compiled graph ready for execution
  */
-export function createAgentGraph(memoryCheckpointer?: BaseCheckpointSaver) {
-  // Create a new StateGraph with our state annotation
-  const graph = new StateGraph(AgentStateAnnotation)
-    // Add the agent node
-    .addNode('agent', agentNode)
-    // Add the tool execution node
-    .addNode('tools', toolNode)
-    // Set the entry point
-    .addEdge(START, 'agent')
-    // Add conditional edge: agent decides whether to use tools
-    .addConditionalEdges('agent', shouldContinue, {
-      continue: 'tools', // If tools are needed, go to tools node
-      end: END, // Otherwise, end the graph
-    })
-    // After tools execute, return to agent
-    .addEdge('tools', 'agent');
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function createAgentGraph(memoryCheckpointer?: any) {
+  console.log('🔄 [GRAPH] Creating agent graph...');
 
-  // Compile the graph with optional checkpointer for memory
-  return graph.compile({ checkpointer: memoryCheckpointer });
+  try {
+    // Create a new StateGraph with our state annotation
+    const graph = new StateGraph(AgentStateAnnotation)
+      // Add the agent node
+      .addNode('agent', agentNode)
+      // Add the tool execution node
+      .addNode('tools', toolNode)
+      // Set the entry point
+      .addEdge(START, 'agent')
+      // Add conditional edge: agent decides whether to use tools
+      .addConditionalEdges('agent', shouldContinue, {
+        continue: 'tools', // If tools are needed, go to tools node
+        end: END, // Otherwise, end the graph
+      })
+      // After tools execute, return to agent
+      .addEdge('tools', 'agent');
+
+    // Compile the graph with optional checkpointer for memory
+    const compiledGraph = graph.compile({ checkpointer: memoryCheckpointer });
+    console.log('🔄 [GRAPH] Graph compiled successfully');
+
+    return compiledGraph;
+  } catch (error) {
+    console.error('🔄 [GRAPH] Error creating/compiling graph:', error);
+    throw error;
+  }
 }
 
 /**
